@@ -59,7 +59,7 @@ class ReadersWritersMonitor:
                 self.condition.wait()
             self.active_readers += 1
             print(f"Reader {reader_id} starts reading. Active readers = {self.active_readers}")
-            
+
     def end_read(self, reader_id: int) -> None:
         """
         Called after a reader finishes reading.
@@ -71,7 +71,10 @@ class ReadersWritersMonitor:
         """
         with self.condition:
             # TODO: Replace 'pass' with your logic
-            pass
+           self.active_readers -= 1
+        print(f"Reader{reader_id}stop reading. Active readers = {self.active_readers}")
+        if self.active_readers == 0:
+            self.condition.notify_all()
 
     def start_write(self, writer_id: int) -> None:
         """
