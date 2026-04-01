@@ -72,9 +72,9 @@ class ReadersWritersMonitor:
         with self.condition:
             # TODO: Replace 'pass' with your logic
            self.active_readers -= 1
-        print(f"Reader{reader_id}stop reading. Active readers = {self.active_readers}")
-        if self.active_readers == 0:
-            self.condition.notify_all()
+           print(f"Reader{reader_id}stop reading. Active readers = {self.active_readers}")
+           if self.active_readers == 0:
+              self.condition.notify_all()
 
     def start_write(self, writer_id: int) -> None:
         """
@@ -108,7 +108,7 @@ class ReadersWritersMonitor:
         with self.condition:
             # TODO: Replace 'pass' with your logic
             self.active_writers -= 1
-            print(f"Write {writer_id} stops writing")
+            print(f"Writer {writer_id} stops writing")
             self.condition.notify_all()
 
 # Donot Change this
@@ -178,7 +178,7 @@ def main() -> None:
     #TODO: Create at least 2 writer threads.
     writers = [
         Writer(writer_id=1, monitor=monitor),
-        Writer(writer_id=1, monitor=monitor)
+        Writer(writer_id=2, monitor=monitor)
     ]
 
     all_threads = readers + writers
